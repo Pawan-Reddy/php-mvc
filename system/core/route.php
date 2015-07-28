@@ -14,7 +14,7 @@ final class Route {
 			
 			if($part == '') {
 				array_shift($parts);
-				break;
+				continue;
 			}
 
 			$loc = '';
