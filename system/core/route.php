@@ -1,5 +1,4 @@
 <?php
-
 final class Route {
 	private $file;
 	private $class;
@@ -7,28 +6,38 @@ final class Route {
 	private $args = array();
 
 	public function __construct($path,$args = array()) {
+		$loc = '';
 
-		$parts = explode('/',$path);
+		//break apart the path
+		$parts = explode('/',str_replace(array('../', '..\\', '..'),'',$path));
 
 		foreach ($parts as $part) {
-			
-			if($part == '') {
+			$loc .= $part;
+
+			if(is_dir(APP_DIR . 'controller/' . $part)) {
+				$loc .= '/';
 				array_shift($parts);
 				continue;
 			}
 
-			$loc = '';
+			$file = APP_DIR . 'controller/' . $loc . '.php';
 
-			if(defined('APP_SUBDIR')) {
-				$loc = APP_SUBDIR;
-			}
+			if(is_file($file)) {
+				$this->file = $file;
 
-			$loc .= $part;
+				$this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $part);
 
-			
+				array_shift($parts);
+				break;
+			}			
 
 		}
 
-
 	}
+
+	public function run() {
+		
+	}
+
+
 }
