@@ -10,7 +10,6 @@
 		exit('config file not available ');
 	}
 	
-	echo APP_DIR . " " . APP_SYSTEM; exit;
 	//startup.php pre-loads all initial files
 	require_once(APP_SYSTEM . 'startup.php');
 
@@ -24,4 +23,3 @@
 	$db = new DB(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 	$registry->set('db', $db);
 
-	//$route = new Route();
