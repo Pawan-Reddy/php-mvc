@@ -10,7 +10,6 @@ define('DB_DATABASE','database_name');
 define('DB_PREFIX', 'prefix');
 
 //Directory location
-define('APP_DIR', str_replace('\\','/',dirname(__FILE__)) . '/');
-define('APP_SYSTEM', APP_DIR . 'system/' ); //system files
-define('APP_FRONT', APP_DIR . 'front/' ); //frontend controller,view model files
-	
+define('APP_MAIN', str_replace('\\','/',dirname(__FILE__)) . '/');
+define('APP_SYSTEM', APP_MAIN . 'system/' ); //system files
+define('APP_DIR', APP_MAIN . 'front/' ); //frontend controller,view model files
