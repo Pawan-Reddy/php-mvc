@@ -6,8 +6,8 @@ defined('VERSION') OR exit('No direct script access allowed');
 define('DB_HOSTNAME','localhost');
 define('DB_USERNAME','root');
 define('DB_PASSWORD','');
-define('DB_DATABASE','dbog');
-define('DB_PREFIX', 'bog');
+define('DB_DATABASE','database_name');
+define('DB_PREFIX', 'prefix');
 
 //Directory location
 define('APP_DIR', str_replace('\\','/',dirname(__FILE__)) . '/');
