@@ -7,7 +7,7 @@ final class Registry {
 		return (isset($this->data[$key]) ? $this->data[$key] : null);
 	}
 
-	public function set($data,$key) {
+	public function set($key,$data) {
 		$this->data[$key] = $data;
 	}
 }
