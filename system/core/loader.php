@@ -10,7 +10,7 @@ final class Loader {
 	public function controller($path, $args = array()) {
 		$route = new Route($path,$args);
 
-		$route->run($this->registry);
+		return $route->run($this->registry);
 
 	}
 
