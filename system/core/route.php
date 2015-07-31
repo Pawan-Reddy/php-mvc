@@ -14,13 +14,13 @@ final class Route {
 		foreach ($parts as $part) {
 			$loc .= $part;
 
-			if(is_dir(APP_DIR . 'controller/' . $part)) {
+			if(is_dir(APP_FRONT . 'controller/' . $part)) {
 				$loc .= '/';
 				array_shift($parts);
 				continue;
 			}
 
-			$file = APP_DIR . 'controller/' . $loc . '.php';
+			$file = APP_FRONT . 'controller/' . $loc . '.php';
 
 			if(is_file($file)) {
 				$this->file = $file;
@@ -35,7 +35,21 @@ final class Route {
 
 	}
 
-	public function run() {
+	public function run($registry) {
+		$class = $this->class;
+
+		$controller = new $class($registry);
+
+		if(method_exists($controller, $this->method)) {
+			$method = $this->method;
+
+			return $controller->$method($this->args);
+
+		} else {
+			trigger_error("$method". ' does not exist in ' . " $class" . '.php file');
+		}
+
+		return false;
 		
 	}
 
