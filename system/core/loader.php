@@ -15,7 +15,18 @@ final class Loader {
 	}
 
 	public function model($model) {
+		$file = APP_FRONT . 'model/' . $model .'.php';
+		$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $model);
+		
+		if(file_exists($file)) {
+			require_once($file);
 
+			$this->registry->set('model_' . str_replace('/','_', $model), new $class($this->registry));
+		} else {
+			trigger_error('Fail to load model file ' . $file);
+
+			exit();
+		}
 	}
 
 	public function view($tpl,$data) {
