@@ -13,26 +13,31 @@ final class Route {
 
 		foreach ($parts as $part) {
 			$loc .= $part;
-
-			if(is_dir(APP_FRONT . 'controller/' . $part)) {
+			
+			if(is_dir(APP_DIR . 'controller/' . $part)) {
 				$loc .= '/';
+				
 				array_shift($parts);
 				continue;
 			}
 
-			$file = APP_FRONT . 'controller/' . $loc . '.php';
+			$file = APP_DIR . 'controller/' . $loc . '.php';
 
+			
 			if(is_file($file)) {
+				include_once($file);
 				$this->file = $file;
 
-				$this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $part);
+				$this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $loc);
 
 				array_shift($parts);
+				
 				break;
-			}			
+			}		
 
 		}
-
+		$this->method = array_shift($parts);
+		$this->args = $args;
 	}
 
 	public function run($registry) {
@@ -40,18 +45,16 @@ final class Route {
 
 		$controller = new $class($registry);
 
-		if(method_exists($controller, $this->method)) {
-			$method = $this->method;
-
-			return $controller->$method($this->args);
-
+		if(!empty($this->method)) {
+			if(method_exists($controller, $this->method)) {
+				$method = $this->method;
+				return $controller->$method($this->args);
+			} else {
+				trigger_error("$method". ' does not exist in ' . " $class" . '.php file');
+			}
 		} else {
-			trigger_error("$method". ' does not exist in ' . " $class" . '.php file');
+			return $controller->index();
 		}
-
 		return false;
-		
 	}
-
-
 }
