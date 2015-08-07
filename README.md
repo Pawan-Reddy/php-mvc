@@ -17,4 +17,4 @@ example.com/?url='folder-name/controller-name/method-name'&args='arguments'
 Note: *folder-name* is the name of the folder in which controller file exists
 
 ##Reference
-OPENCART(https://github.com/opencart/opencart)
+Opencart(https://github.com/opencart/opencart)
