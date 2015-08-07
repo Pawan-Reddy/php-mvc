@@ -24,7 +24,8 @@ final class Route {
 			$file = APP_DIR . 'controller/' . $loc . '.php';
 
 			
-			if(is_file($file)) {
+			if(file_exists($file) && is_file($file)) {
+				
 				include_once($file);
 				$this->file = $file;
 
@@ -33,10 +34,25 @@ final class Route {
 				array_shift($parts);
 				
 				break;
+			} else {
+				
+				$file = APP_DIR . 'controller/common/home.php';
+
+				include_once($file);
+				$this->file = $file;
+
+				$this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', 'common/home');
+
+				array_shift($parts);
+				unset($parts);
+
+				break;
 			}		
 
 		}
-		$this->method = array_shift($parts);
+		if(!empty($parts)) {
+			$this->method = array_shift($parts);	
+		}
 		$this->args = $args;
 	}
 
@@ -45,13 +61,11 @@ final class Route {
 
 		$controller = new $class($registry);
 
-		if(!empty($this->method)) {
-			if(method_exists($controller, $this->method)) {
-				$method = $this->method;
-				return $controller->$method($this->args);
-			} else {
-				trigger_error("$method". ' does not exist in ' . " $class" . '.php file');
-			}
+		if(method_exists($controller, $this->method)) {
+			$method = $this->method;
+
+			return $controller->$method($this->args);
+
 		} else {
 			return $controller->index();
 		}
