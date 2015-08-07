@@ -7,7 +7,7 @@ This is just for my learning of mvc architecture and can also be used by other i
 ## URL EXAMPLE
 link to access a page
 ```
-example.com/?url='folder-name/controller-name/'&args='arguments'
+example.com/?url='folder-name/controller-name/'
 ```
 
 link to access a controller method
