@@ -24,6 +24,10 @@
 
 	$registry->set('request',$request);
 	
+	// Database
+	$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+	$registry->set('db', $db);
+	
 	if(isset($request->get['url']) && isset($request->get['args'])) {
 		$route = new Route($request->get['url'],$request->get['args']);
 	} else if(isset($request->get['url'])){
