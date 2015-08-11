@@ -57,4 +57,5 @@ final class MySQLi {
 	public function __destruct() {
 		$this->link->close();
 	}
+	
 }
