@@ -8,6 +8,7 @@ define('DB_USERNAME','root');
 define('DB_PASSWORD','');
 define('DB_DATABASE','database_name');
 define('DB_PREFIX', 'prefix');
+define('DB_DRIVER', 'mysqi'); //set to either MySQLi or mPDO
 
 //Directory location
 define('APP_MAIN', str_replace('\\','/',dirname(__FILE__)) . '/');
