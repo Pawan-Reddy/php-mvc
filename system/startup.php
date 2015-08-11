@@ -31,3 +31,5 @@
 	require_once(APP_SYSTEM . 'core/route.php');
 	require_once(APP_SYSTEM . 'core/registry.php');
 
+	//helper files
+	require_once(APP_SYSTEM . 'lib/db.php');
